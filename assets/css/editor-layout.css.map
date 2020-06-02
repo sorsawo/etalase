@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAEA;;wGAEyG;EACxG,SAAS,EC2CG,MAAM",
+"sources": ["../scss/editor-layout.scss","../scss/partials/_base.scss"],
+"names": [],
+"file": "editor-layout.css"
+}
