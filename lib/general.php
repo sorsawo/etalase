@@ -12,7 +12,7 @@ function etalasepress_register_required_plugins() {
             'required' => true,
         ),
         array(
-            'name'     => 'WordPress SEO by Yoast',
+            'name'     => 'Yoast SEO',
             'slug'     => 'wordpress-seo',
             'required' => false,
         ),
