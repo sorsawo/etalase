@@ -47,9 +47,9 @@ function etalasepress_register_required_plugins() {
             'required' => false,
         ),
         array(
-            'name'     => 'WP Super Cache',
-            'slug'     => 'wp-super-cache',
-            'required' => false,
+            'name'     => 'Sorsawo Updater',
+            'source'   => 'https://github.com/sorsawo/sorsawo-updater/archive/master.zip',
+            'required' => true,
         ),
     ) );
 

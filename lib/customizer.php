@@ -1,23 +1,6 @@
 <?php
 
 function etalasepress_customize_register( $wp_customize ) {
-    if ( in_array( 'login-logo', etalasepress_get_setting_value( 'modules' ) ) ) {
-        $wp_customize->add_setting( 'etalasepress_login_image', array(
-            'default'           => '',
-            'sanitize_callback' => 'sanitize_text_field'
-        ) );
-
-        $wp_customize->add_control( new WP_Customize_Cropped_Image_Control( $wp_customize, 'etalasepress_login_image', array(
-            'label'       => __( 'Login Image', 'etalasepress' ),
-            'description' => esc_html__( 'This image will be displayed on WordPress login page. Suggested image dimensions is 300 by 100 pixels.', 'etalasepress' ),
-            'section'     => 'title_tagline',
-            'flex_width'  => true,
-            'flex_height' => true,
-            'width'       => 300,
-            'height'      => 100
-        ) ) );
-    }
-    
     $wp_customize->add_section( 'etalasepress_settings', array(
         'title' => __( 'Theme Settings', 'etalasepress' )
     ) );
