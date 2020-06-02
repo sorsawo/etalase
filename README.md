@@ -1,1 +1,1 @@
-EtalasePress is fast and lightweight WordPress theme designed and developed by Sorsawo.Com. EtalasePress is the perfect starter theme for online store using WooCommerce and Easy Digital Downloads.
+EtalasePress is fast and lightweight WordPress theme designed and developed by [Sorsawo.Com](https://sorsawo.com). EtalasePress is the perfect starter theme for online store using [WooCommerce](https://wordpress.org/plugins/woocommerce/) and [Easy Digital Downloads](https://wordpress.org/plugins/easy-digital-downloads/).
