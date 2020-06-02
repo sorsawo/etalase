@@ -1,12 +1,12 @@
 <?php
-if ( !function_exists( 'alamanda_page_layout' ) ) {
+if ( !function_exists( 'etalasepress_page_layout' ) ) {
     return;
 }
 
-$layout = alamanda_page_layout();
+$layout = etalasepress_page_layout();
 
 if ( !in_array( $layout, array( 'content-sidebar', 'sidebar-content' ) ) ) {
     return;
 }
 
-do_action( 'alamanda_sidebar' );
+do_action( 'etalasepress_sidebar' );

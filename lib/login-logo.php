@@ -1,10 +1,10 @@
 <?php
-if ( ! in_array( 'login-logo', alamanda_get_setting_value( 'modules' ) ) ) {
+if ( ! in_array( 'login-logo', etalasepress_get_setting_value( 'modules' ) ) ) {
     return;
 }
 
-function alamanda_login_logo() {
-    $image_id = get_theme_mod( 'alamanda_login_image' );
+function etalasepress_login_logo() {
+    $image_id = get_theme_mod( 'etalasepress_login_image' );
     
     if ( empty( $image_id ) ) {
         return;
@@ -34,11 +34,11 @@ function alamanda_login_logo() {
     <?php
 }
 
-add_action( 'login_head', 'alamanda_login_logo' );
+add_action( 'login_head', 'etalasepress_login_logo' );
 
-function alamanda_login_header_url() {
+function etalasepress_login_header_url() {
     return esc_url( home_url() );
 }
 
-add_filter( 'login_headerurl', 'alamanda_login_header_url' );
+add_filter( 'login_headerurl', 'etalasepress_login_header_url' );
 add_filter( 'login_headertext', '__return_empty_string' );

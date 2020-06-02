@@ -1,6 +1,6 @@
 <?php
 
-function alamanda_social_links() {
+function etalasepress_social_links() {
     $socials = [
         'facebook' => [
             'key'   => 'facebook_site',
@@ -36,7 +36,7 @@ function alamanda_social_links() {
         }
         
         if ( !empty( $url ) ) {
-            $output[] = '<li><a href="' . esc_url_raw( $url ) . '" target="_blank" rel="noopener noreferrer">' . alamanda_icon( array( 'icon' => $social, 'group' => 'social', 'label' => $settings['label'] ) ) . '<span class="screen-reader-text">' . esc_html( $settings['label'] ) . '</span></a></li>';
+            $output[] = '<li><a href="' . esc_url_raw( $url ) . '" target="_blank" rel="noopener noreferrer">' . etalasepress_icon( array( 'icon' => $social, 'group' => 'social', 'label' => $settings['label'] ) ) . '<span class="screen-reader-text">' . esc_html( $settings['label'] ) . '</span></a></li>';
         }
     }
 

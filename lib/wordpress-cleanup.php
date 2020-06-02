@@ -1,6 +1,6 @@
 <?php
 
-function alamanda_dont_update_theme( $r, $url ) {
+function etalasepress_dont_update_theme( $r, $url ) {
     if ( 0 !== strpos( $url, 'https://api.wordpress.org/themes/update-check/1.1/' ) ) {
         return $r; // Not a theme update request. Bail immediately.
     }
@@ -17,26 +17,26 @@ function alamanda_dont_update_theme( $r, $url ) {
     return $r;
 }
 
-add_filter( 'http_request_args', 'alamanda_dont_update_theme', 5, 2 );
+add_filter( 'http_request_args', 'etalasepress_dont_update_theme', 5, 2 );
 
-function alamanda_header_meta_tags() {
+function etalasepress_header_meta_tags() {
     echo '<meta charset="' . get_bloginfo( 'charset' ) . '">';
     echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
     echo '<link rel="profile" href="http://gmpg.org/xfn/11">';
 }
 
-add_action( 'wp_head', 'alamanda_header_meta_tags' );
+add_action( 'wp_head', 'etalasepress_header_meta_tags' );
 
-function alamanda_dequeue_jquery_migrate( &$scripts ) {
+function etalasepress_dequeue_jquery_migrate( &$scripts ) {
     if ( !is_admin() ) {
         $scripts->remove( 'jquery' );
         $scripts->add( 'jquery', false, array( 'jquery-core' ), '1.10.2' );
     }
 }
 
-add_filter( 'wp_default_scripts', 'alamanda_dequeue_jquery_migrate' );
+add_filter( 'wp_default_scripts', 'etalasepress_dequeue_jquery_migrate' );
 
-function alamanda_singular_body_class( $classes ) {
+function etalasepress_singular_body_class( $classes ) {
     if ( is_singular() ) {
         $classes[] = 'singular';
     }
@@ -44,9 +44,9 @@ function alamanda_singular_body_class( $classes ) {
     return $classes;
 }
 
-add_filter( 'body_class', 'alamanda_singular_body_class' );
+add_filter( 'body_class', 'etalasepress_singular_body_class' );
 
-function alamanda_clean_body_classes( $classes ) {
+function etalasepress_clean_body_classes( $classes ) {
     $allowed_classes = [
         'singular',
         'single',
@@ -67,9 +67,9 @@ function alamanda_clean_body_classes( $classes ) {
     return array_intersect( $classes, $allowed_classes );
 }
 
-add_filter( 'body_class', 'alamanda_clean_body_classes', 20 );
+add_filter( 'body_class', 'etalasepress_clean_body_classes', 20 );
 
-function alamanda_clean_nav_menu_classes( $classes ) {
+function etalasepress_clean_nav_menu_classes( $classes ) {
     if ( !is_array( $classes ) ) {
         return $classes;
     }
@@ -107,9 +107,9 @@ function alamanda_clean_nav_menu_classes( $classes ) {
     return $classes;
 }
 
-add_filter( 'nav_menu_css_class', 'alamanda_clean_nav_menu_classes', 5 );
+add_filter( 'nav_menu_css_class', 'etalasepress_clean_nav_menu_classes', 5 );
 
-function alamanda_clean_post_classes( $classes ) {
+function etalasepress_clean_post_classes( $classes ) {
     if ( !is_array( $classes ) ) {
         return $classes;
     }
@@ -122,9 +122,9 @@ function alamanda_clean_post_classes( $classes ) {
     return array_intersect( $classes, $allowed_classes );
 }
 
-add_filter( 'post_class', 'alamanda_clean_post_classes', 5 );
+add_filter( 'post_class', 'etalasepress_clean_post_classes', 5 );
 
-function alamanda_archive_title_remove_prefix( $title ) {
+function etalasepress_archive_title_remove_prefix( $title ) {
     $title_pieces = explode( ': ', $title );
 
     if ( count( $title_pieces ) > 1 ) {
@@ -135,15 +135,15 @@ function alamanda_archive_title_remove_prefix( $title ) {
     return $title;
 }
 
-add_filter( 'get_the_archive_title', 'alamanda_archive_title_remove_prefix' );
+add_filter( 'get_the_archive_title', 'etalasepress_archive_title_remove_prefix' );
 
-function alamanda_staff_comment_class( $classes, $class, $comment_id, $comment, $post_id ) {
+function etalasepress_staff_comment_class( $classes, $class, $comment_id, $comment, $post_id ) {
     if ( empty( $comment->user_id ) ) {
         return $classes;
     }
 
     $staff_roles = array( 'comment_manager', 'author', 'editor', 'administrator' );
-    $staff_roles = apply_filters( 'alamanda_staff_roles', $staff_roles );
+    $staff_roles = apply_filters( 'etalasepress_staff_roles', $staff_roles );
     $user = get_userdata( $comment->user_id );
 
     if ( !empty( array_intersect( $user->roles, $staff_roles ) ) ) {
@@ -153,26 +153,26 @@ function alamanda_staff_comment_class( $classes, $class, $comment_id, $comment, 
     return $classes;
 }
 
-add_filter( 'comment_class', 'alamanda_staff_comment_class', 10, 5 );
+add_filter( 'comment_class', 'etalasepress_staff_comment_class', 10, 5 );
 
-function alamanda_remove_avatars_from_comments( $avatar ) {
+function etalasepress_remove_avatars_from_comments( $avatar ) {
     global $in_comment_loop;
     return $in_comment_loop ? '' : $avatar;
 }
 
-add_filter( 'get_avatar', 'alamanda_remove_avatars_from_comments' );
+add_filter( 'get_avatar', 'etalasepress_remove_avatars_from_comments' );
 
-function alamanda_comment_form_button_class( $args ) {
+function etalasepress_comment_form_button_class( $args ) {
     $args['class_submit'] = 'submit wp-block-button__link';
     return $args;
 }
 
-add_filter( 'comment_form_defaults', 'alamanda_comment_form_button_class' );
+add_filter( 'comment_form_defaults', 'etalasepress_comment_form_button_class' );
 
-function alamanda_excerpt_more() {
+function etalasepress_excerpt_more() {
     return '&hellip;';
 }
 
-add_filter( 'excerpt_more', 'alamanda_excerpt_more' );
+add_filter( 'excerpt_more', 'etalasepress_excerpt_more' );
 
 remove_action( 'wp_print_styles', 'print_emoji_styles' );

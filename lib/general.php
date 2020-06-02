@@ -1,10 +1,10 @@
 <?php
-function alamanda_register_required_plugins() {
+function etalasepress_register_required_plugins() {
     $config = array(
         'has_notices' => false
     );
     
-    $plugins = apply_filters( 'alamanda_required_plugins', array(
+    $plugins = apply_filters( 'etalasepress_required_plugins', array(
         array(
             'name'     => 'Core Functionality',
             'slug'     => 'core-functionality',
@@ -56,10 +56,10 @@ function alamanda_register_required_plugins() {
     tgmpa( $plugins, $config );
 }
 
-add_action( 'tgmpa_register', 'alamanda_register_required_plugins' );
+add_action( 'tgmpa_register', 'etalasepress_register_required_plugins' );
 
-function alamanda_color_scheme_body_class( $classes ) {
-    $color_scheme = get_theme_mod( 'alamanda_color_scheme', 'default' );
+function etalasepress_color_scheme_body_class( $classes ) {
+    $color_scheme = get_theme_mod( 'etalasepress_color_scheme', 'default' );
     
     if ( 'default' !== $color_scheme ) {
         $classes[] = $color_scheme;
@@ -68,4 +68,4 @@ function alamanda_color_scheme_body_class( $classes ) {
     return $classes;
 }
 
-add_filter( 'body_class', 'alamanda_color_scheme_body_class', 6 );
+add_filter( 'body_class', 'etalasepress_color_scheme_body_class', 6 );

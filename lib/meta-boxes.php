@@ -1,28 +1,28 @@
 <?php
-function alamanda_add_meta_boxes() {
-    add_meta_box( 'alamanda-page-settings', __( 'Alamanda Page Settings', 'alamanda' ), 'alamanda_add_page_settings_meta_box', 'page', 'normal', 'high' );
+function etalasepress_add_meta_boxes() {
+    add_meta_box( 'etalasepress-page-settings', __( 'EtalasePress Page Settings', 'etalasepress' ), 'etalasepress_add_page_settings_meta_box', 'page', 'normal', 'high' );
 }
 
-add_action( 'add_meta_boxes', 'alamanda_add_meta_boxes', 30 );
+add_action( 'add_meta_boxes', 'etalasepress_add_meta_boxes', 30 );
     
-function alamanda_add_page_settings_meta_box( $post, $box ) {
-    $layout_setting  = get_post_meta( $post->ID, '_alamanda_page_layout', true );
+function etalasepress_add_page_settings_meta_box( $post, $box ) {
+    $layout_setting  = get_post_meta( $post->ID, '_etalasepress_page_layout', true );
     
     $layout_options = array(
-        'content-sidebar'    => __( 'Content - Sidebar', 'alamanda' ),
-        'sidebar-content'    => __( 'Sidebar - Content', 'alamanda' ),
-        'content'            => __( 'Content - No Sidebar', 'alamanda' ),
-        'full-width-content' => __( 'Full Width Content', 'alamanda' ),
+        'content-sidebar'    => __( 'Content - Sidebar', 'etalasepress' ),
+        'sidebar-content'    => __( 'Sidebar - Content', 'etalasepress' ),
+        'content'            => __( 'Content - No Sidebar', 'etalasepress' ),
+        'full-width-content' => __( 'Full Width Content', 'etalasepress' ),
     );
 
-    wp_nonce_field( 'alamanda_save_meta_boxes', 'alamanda_nonce' );
+    wp_nonce_field( 'etalasepress_save_meta_boxes', 'etalasepress_nonce' );
     ?>
     <table class="form-table">
         <tr valign="top">
-            <th scope="row" class="titledesc"><?php echo esc_html__( 'Page Layout', 'alamanda' ) ?></th>
+            <th scope="row" class="titledesc"><?php echo esc_html__( 'Page Layout', 'etalasepress' ) ?></th>
             <td class="forminp">
                 <select name="page_layout">
-                    <option value=""><?php echo __( 'Default Layout', 'alamanda' ) ?></option>
+                    <option value=""><?php echo __( 'Default Layout', 'etalasepress' ) ?></option>
                     <?php foreach ( $layout_options as $layout => $label ): ?>
                     <option <?php selected( $layout_setting, $layout ) ?> value="<?php echo $layout ?>"><?php echo $label ?></option>
                     <?php endforeach ?>
@@ -31,10 +31,10 @@ function alamanda_add_page_settings_meta_box( $post, $box ) {
         </tr>
     </table>
     <?php
-    do_action( 'alamanda_add_page_settings_metabox' );
+    do_action( 'etalasepress_add_page_settings_metabox' );
 }
     
-function alamanda_save_meta_boxes( $post_id, $post ) {
+function etalasepress_save_meta_boxes( $post_id, $post ) {
     if ( empty( $post_id ) || empty( $post ) ) {
         return;
     }
@@ -55,15 +55,15 @@ function alamanda_save_meta_boxes( $post_id, $post ) {
     }
 
     // Check the nonce
-    if ( empty( $_POST['alamanda_nonce'] ) || !wp_verify_nonce( $_POST['alamanda_nonce'], 'alamanda_save_meta_boxes' ) ) {
+    if ( empty( $_POST['etalasepress_nonce'] ) || !wp_verify_nonce( $_POST['etalasepress_nonce'], 'etalasepress_save_meta_boxes' ) ) {
         return;
     }
 
     if ( isset( $_POST['page_layout'] ) ) {
-        update_post_meta( $post_id, '_alamanda_page_layout', sanitize_text_field( $_POST['page_layout'] ) );
+        update_post_meta( $post_id, '_etalasepress_page_layout', sanitize_text_field( $_POST['page_layout'] ) );
     }
     
-    do_action( 'alamanda_save_page_settings_metabox' );
+    do_action( 'etalasepress_save_page_settings_metabox' );
 }
 
-add_action( 'save_post', 'alamanda_save_meta_boxes', 1, 2 );
+add_action( 'save_post', 'etalasepress_save_meta_boxes', 1, 2 );

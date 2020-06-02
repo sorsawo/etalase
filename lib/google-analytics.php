@@ -1,6 +1,6 @@
 <?php
-function alamanda_google_analytics_code() {
-    $tracking_id = alamanda_get_setting_value( 'google_analytics_id' );
+function etalasepress_google_analytics_code() {
+    $tracking_id = etalasepress_get_setting_value( 'google_analytics_id' );
     
     if ( '' !== $tracking_id ) {
         echo '<script async src="https://www.googletagmanager.com/gtag/js?id=' . $tracking_id . '"></script>', "\n";
@@ -13,4 +13,4 @@ function alamanda_google_analytics_code() {
     }
 }
 
-add_action( 'wp_head', 'alamanda_google_analytics_code', 99 );
+add_action( 'wp_head', 'etalasepress_google_analytics_code', 99 );

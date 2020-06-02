@@ -1,5 +1,5 @@
 <?php
-function alamanda_layout_editor_class( $classes ) {
+function etalasepress_layout_editor_class( $classes ) {
     $screen = get_current_screen();
 
     if ( ! $screen->is_block_editor() ) {
@@ -7,37 +7,37 @@ function alamanda_layout_editor_class( $classes ) {
     }
 
     $post_id = isset( $_GET['post'] ) ? intval( $_GET['post'] ) : false;
-    $layout = alamanda_page_layout( $post_id );
+    $layout = etalasepress_page_layout( $post_id );
     $classes .= ' ' . $layout . ' ';
 
     return $classes;
 }
 
-add_filter( 'admin_body_class', 'alamanda_layout_editor_class' );
+add_filter( 'admin_body_class', 'etalasepress_layout_editor_class' );
 
-function alamanda_editor_layout_style() {
+function etalasepress_editor_layout_style() {
     wp_enqueue_style( 'altair-editor-layout', get_stylesheet_directory_uri() . '/assets/css/editor-layout.css', [], filemtime( get_stylesheet_directory() . '/assets/css/editor-layout.css' ) );
 }
 
-add_action( 'enqueue_block_editor_assets', 'alamanda_editor_layout_style' );
+add_action( 'enqueue_block_editor_assets', 'etalasepress_editor_layout_style' );
 
-function alamanda_widgets_init() {
-    register_sidebar( alamanda_widget_area_args( array(
-        'name' => esc_html__( 'Primary Sidebar', 'alamanda' ),
+function etalasepress_widgets_init() {
+    register_sidebar( etalasepress_widget_area_args( array(
+        'name' => esc_html__( 'Primary Sidebar', 'etalasepress' ),
     ) ) );
 }
 
-add_action( 'widgets_init', 'alamanda_widgets_init' );
+add_action( 'widgets_init', 'etalasepress_widgets_init' );
 
-function alamanda_layout_body_class( $classes ) {
-    $classes[] = alamanda_page_layout();
+function etalasepress_layout_body_class( $classes ) {
+    $classes[] = etalasepress_page_layout();
 
     return $classes;
 }
 
-add_filter( 'body_class', 'alamanda_layout_body_class', 5 );
+add_filter( 'body_class', 'etalasepress_layout_body_class', 5 );
 
-function alamanda_page_layout_options() {
+function etalasepress_page_layout_options() {
     return array(
         'content-sidebar',
         'sidebar-content',
@@ -46,7 +46,7 @@ function alamanda_page_layout_options() {
     );
 }
 
-function alamanda_widget_area_args( $args = array() ) {
+function etalasepress_widget_area_args( $args = array() ) {
     $defaults = array(
         'name'          => '',
         'id'            => '',
@@ -66,48 +66,48 @@ function alamanda_widget_area_args( $args = array() ) {
     return $args;
 }
 
-function alamanda_page_layout( $id = false ) {
+function etalasepress_page_layout( $id = false ) {
 
-    $available_layouts = alamanda_page_layout_options();
+    $available_layouts = etalasepress_page_layout_options();
     
-    $layout = get_theme_mod( 'alamanda_default_layout', 'content-sidebar' );
+    $layout = get_theme_mod( 'etalasepress_default_layout', 'content-sidebar' );
 
     if ( is_singular() || $id ) {
         $id = $id ? intval( $id ) : get_the_ID();
-        $selected = get_post_meta( $id, '_alamanda_page_layout', true );
+        $selected = get_post_meta( $id, '_etalasepress_page_layout', true );
         
         if ( !empty( $selected ) && in_array( $selected, $available_layouts ) ) {
             $layout = $selected;
         }
     }
 
-    $layout = apply_filters( 'alamanda_page_layout', $layout );
+    $layout = apply_filters( 'etalasepress_page_layout', $layout );
     $layout = in_array( $layout, $available_layouts ) ? $layout : $available_layouts[0];
 
     return sanitize_title_with_dashes( $layout );
 }
 
-function alamanda_return_full_width_content() {
+function etalasepress_return_full_width_content() {
     return 'full-width-content';
 }
 
-function alamanda_return_content_sidebar() {
+function etalasepress_return_content_sidebar() {
     return 'content-sidebar';
 }
 
-function alamanda_return_sidebar_content() {
+function etalasepress_return_sidebar_content() {
     return 'sidebar-content';
 }
 
-function alamanda_return_content() {
+function etalasepress_return_content() {
     return 'content';
 }
 
-function alamanda_do_sidebar() {
+function etalasepress_do_sidebar() {
     $sidebar = 'primary-sidebar';
     $display = is_active_sidebar( $sidebar );
 
-    if ( !apply_filters( 'alamanda_display_sidebar', $display ) ) {
+    if ( !apply_filters( 'etalasepress_display_sidebar', $display ) ) {
         return;
     }
 
@@ -126,4 +126,4 @@ function alamanda_do_sidebar() {
     tha_sidebars_after();
 }
 
-add_action( 'alamanda_sidebar', 'alamanda_do_sidebar' );
+add_action( 'etalasepress_sidebar', 'etalasepress_do_sidebar' );

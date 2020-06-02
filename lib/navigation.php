@@ -1,9 +1,9 @@
 <?php
-function alamanda_site_header() {
-    echo alamanda_mobile_menu_toggle();
-    echo alamanda_search_toggle();
+function etalasepress_site_header() {
+    echo etalasepress_mobile_menu_toggle();
+    echo etalasepress_search_toggle();
 
-    echo '<nav' . alamanda_amp_class( 'nav-menu', 'active', 'menuActive' ) . ' role="navigation">';
+    echo '<nav' . etalasepress_amp_class( 'nav-menu', 'active', 'menuActive' ) . ' role="navigation">';
 
     if ( has_nav_menu( 'primary' ) ) {
         wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu', 'container_class' => 'nav-primary' ) );
@@ -15,14 +15,14 @@ function alamanda_site_header() {
 
     echo '</nav>';
 
-    echo '<div' . alamanda_amp_class( 'header-search', 'active', 'searchActive' ) . '>' . get_search_form( array( 'echo' => false ) ) . '</div>';
+    echo '<div' . etalasepress_amp_class( 'header-search', 'active', 'searchActive' ) . '>' . get_search_form( array( 'echo' => false ) ) . '</div>';
 }
 
-add_action( 'tha_header_bottom', 'alamanda_site_header', 11 );
+add_action( 'tha_header_bottom', 'etalasepress_site_header', 11 );
 
-function alamanda_nav_extras( $menu, $args ) {
+function etalasepress_nav_extras( $menu, $args ) {
     if ( 'primary' === $args->theme_location ) {
-        $menu .= '<li class="menu-item search">' . alamanda_search_toggle() . '</li>';
+        $menu .= '<li class="menu-item search">' . etalasepress_search_toggle() . '</li>';
     }
 
     if ( 'secondary' === $args->theme_location ) {
@@ -32,46 +32,46 @@ function alamanda_nav_extras( $menu, $args ) {
     return $menu;
 }
 
-add_filter( 'wp_nav_menu_items', 'alamanda_nav_extras', 10, 2 );
+add_filter( 'wp_nav_menu_items', 'etalasepress_nav_extras', 10, 2 );
 
-function alamanda_search_toggle() {
-    $output = '<button' . alamanda_amp_class( 'search-toggle', 'active', 'searchActive' ) . alamanda_amp_toggle( 'searchActive', array( 'menuActive', 'mobileFollow' ) ) . '>';
-    $output .= alamanda_icon( array( 'icon' => 'search', 'size' => 24, 'class' => 'open' ) );
-    $output .= alamanda_icon( array( 'icon' => 'close', 'size' => 24, 'class' => 'close' ) );
-    $output .= sprintf( '<span class="screen-reader-text">%s</span>', __( 'Search', 'alamanda' ) );
+function etalasepress_search_toggle() {
+    $output = '<button' . etalasepress_amp_class( 'search-toggle', 'active', 'searchActive' ) . etalasepress_amp_toggle( 'searchActive', array( 'menuActive', 'mobileFollow' ) ) . '>';
+    $output .= etalasepress_icon( array( 'icon' => 'search', 'size' => 24, 'class' => 'open' ) );
+    $output .= etalasepress_icon( array( 'icon' => 'close', 'size' => 24, 'class' => 'close' ) );
+    $output .= sprintf( '<span class="screen-reader-text">%s</span>', __( 'Search', 'etalasepress' ) );
     $output .= '</button>';
 
     return $output;
 }
 
-function alamanda_mobile_menu_toggle() {
-    $output = '<button' . alamanda_amp_class( 'menu-toggle', 'active', 'menuActive' ) . alamanda_amp_toggle( 'menuActive', array( 'searchActive', 'mobileFollow' ) ) . '>';
-    $output .= alamanda_icon( array( 'icon' => 'menu', 'size' => 24, 'class' => 'open' ) );
-    $output .= alamanda_icon( array( 'icon' => 'close', 'size' => 24, 'class' => 'close' ) );
-    $output .= sprintf( '<span class="screen-reader-text">%s</span>', __( 'Menu', 'alamanda' ) );
+function etalasepress_mobile_menu_toggle() {
+    $output = '<button' . etalasepress_amp_class( 'menu-toggle', 'active', 'menuActive' ) . etalasepress_amp_toggle( 'menuActive', array( 'searchActive', 'mobileFollow' ) ) . '>';
+    $output .= etalasepress_icon( array( 'icon' => 'menu', 'size' => 24, 'class' => 'open' ) );
+    $output .= etalasepress_icon( array( 'icon' => 'close', 'size' => 24, 'class' => 'close' ) );
+    $output .= sprintf( '<span class="screen-reader-text">%s</span>', __( 'Menu', 'etalasepress' ) );
     $output .= '</button>';
 
     return $output;
 }
 
-function alamanda_nav_add_dropdown_icons( $output, $item, $depth, $args ) {
+function etalasepress_nav_add_dropdown_icons( $output, $item, $depth, $args ) {
     if ( !isset( $args->theme_location ) || 'primary' !== $args->theme_location ) {
         return $output;
     }
 
     if ( in_array( 'menu-item-has-children', $item->classes, true ) ) {
         // Add SVG icon to parent items.
-        $icon = alamanda_icon( array( 'icon' => 'navigate-down', 'size' => 8, 'title' => __( 'Submenu Dropdown', 'alamanda' ) ) );
+        $icon = etalasepress_icon( array( 'icon' => 'navigate-down', 'size' => 8, 'title' => __( 'Submenu Dropdown', 'etalasepress' ) ) );
 
-        $output .= sprintf( '<button' . alamanda_amp_nav_dropdown( $args->theme_location, $depth ) . ' tabindex="-1">%s</button>', $icon );
+        $output .= sprintf( '<button' . etalasepress_amp_nav_dropdown( $args->theme_location, $depth ) . ' tabindex="-1">%s</button>', $icon );
     }
 
     return $output;
 }
 
-add_filter( 'walker_nav_menu_start_el', 'alamanda_nav_add_dropdown_icons', 10, 4 );
+add_filter( 'walker_nav_menu_start_el', 'etalasepress_nav_add_dropdown_icons', 10, 4 );
 
-function alamanda_archive_paginated_navigation() {
+function etalasepress_archive_paginated_navigation() {
     if ( is_singular() ) {
         return;
     }
@@ -104,14 +104,14 @@ function alamanda_archive_paginated_navigation() {
 
     echo '<nav class="archive-pagination pagination">';
 
-    $before_number = '<span class="screen-reader-text">' . __( 'Go to page', 'alamanda' ) . '</span>';
+    $before_number = '<span class="screen-reader-text">' . __( 'Go to page', 'etalasepress' ) . '</span>';
 
-    printf( '<ul role="navigation" aria-label="%s">', esc_attr__( 'Pagination', 'alamanda' ) );
+    printf( '<ul role="navigation" aria-label="%s">', esc_attr__( 'Pagination', 'etalasepress' ) );
 
     // Previous Post Link.
     if ( get_previous_posts_link() ) {
-        $label = __( '<span class="screen-reader-text">Go to</span> Previous Page', 'alamanda' );
-        $link = get_previous_posts_link( apply_filters( 'alamanda_prev_link_text', '&#x000AB; ' . $label ) );
+        $label = __( '<span class="screen-reader-text">Go to</span> Previous Page', 'etalasepress' );
+        $link = get_previous_posts_link( apply_filters( 'etalasepress_prev_link_text', '&#x000AB; ' . $label ) );
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Value is hardcoded and safe, not set via input.
         printf( '<li class="pagination-previous">%s</li>' . "\n", $link );
     }
@@ -124,7 +124,7 @@ function alamanda_archive_paginated_navigation() {
         printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, get_pagenum_link( 1 ), trim( $before_number . ' 1' ) );
 
         if ( !in_array( 2, $links, true ) ) {
-            $label = sprintf( '<span class="screen-reader-text">%s</span> &#x02026;', __( 'Interim pages omitted', 'alamanda' ) );
+            $label = sprintf( '<span class="screen-reader-text">%s</span> &#x02026;', __( 'Interim pages omitted', 'etalasepress' ) );
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Value is known to be safe, not set via input.
             printf( '<li class="pagination-omission">%s</li> ' . "\n", $label );
         }
@@ -137,7 +137,7 @@ function alamanda_archive_paginated_navigation() {
         $aria = '';
         if ( $paged === $link ) {
             $class = ' class="active" ';
-            $aria = ' aria-label="' . esc_attr__( 'Current page', 'alamanda' ) . '" aria-current="page"';
+            $aria = ' aria-label="' . esc_attr__( 'Current page', 'etalasepress' ) . '" aria-current="page"';
         }
 
         printf(
@@ -155,7 +155,7 @@ function alamanda_archive_paginated_navigation() {
     if ( !in_array( $max, $links, true ) ) {
 
         if ( !in_array( $max - 1, $links, true ) ) {
-            $label = sprintf( '<span class="screen-reader-text">%s</span> &#x02026;', __( 'Interim pages omitted', 'alamanda' ) );
+            $label = sprintf( '<span class="screen-reader-text">%s</span> &#x02026;', __( 'Interim pages omitted', 'etalasepress' ) );
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Value is known to be safe, not set via input.
             printf( '<li class="pagination-omission">%s</li> ' . "\n", $label );
         }
@@ -167,8 +167,8 @@ function alamanda_archive_paginated_navigation() {
 
     // Next Post Link.
     if ( get_next_posts_link() ) {
-        $label = __( '<span class="screen-reader-text">Go to</span> Next Page', 'alamanda' );
-        $link = get_next_posts_link( apply_filters( 'alamanda_next_link_text', $label . ' &#x000BB;' ) );
+        $label = __( '<span class="screen-reader-text">Go to</span> Next Page', 'etalasepress' );
+        $link = get_next_posts_link( apply_filters( 'etalasepress_next_link_text', $label . ' &#x000BB;' ) );
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Value is hardcoded and safe, not set via input.
         printf( '<li class="pagination-next">%s</li>' . "\n", $link );
     }
@@ -177,4 +177,4 @@ function alamanda_archive_paginated_navigation() {
     echo '</nav>';
 }
 
-add_action( 'tha_content_while_after', 'alamanda_archive_paginated_navigation' );
+add_action( 'tha_content_while_after', 'etalasepress_archive_paginated_navigation' );

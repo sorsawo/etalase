@@ -1,15 +1,15 @@
 <?php
 global $wp_embed;
 
-add_filter( 'alamanda_the_content', array( $wp_embed, 'run_shortcode' ), 8 );
-add_filter( 'alamanda_the_content', array( $wp_embed, 'autoembed' ), 8 );
-add_filter( 'alamanda_the_content', 'wptexturize' );
-add_filter( 'alamanda_the_content', 'convert_chars' );
-add_filter( 'alamanda_the_content', 'wpautop' );
-add_filter( 'alamanda_the_content', 'shortcode_unautop' );
-add_filter( 'alamanda_the_content', 'do_shortcode' );
+add_filter( 'etalasepress_the_content', array( $wp_embed, 'run_shortcode' ), 8 );
+add_filter( 'etalasepress_the_content', array( $wp_embed, 'autoembed' ), 8 );
+add_filter( 'etalasepress_the_content', 'wptexturize' );
+add_filter( 'etalasepress_the_content', 'convert_chars' );
+add_filter( 'etalasepress_the_content', 'wpautop' );
+add_filter( 'etalasepress_the_content', 'shortcode_unautop' );
+add_filter( 'etalasepress_the_content', 'do_shortcode' );
 
-function alamanda_first_term( $args = [ ] ) {
+function etalasepress_first_term( $args = [ ] ) {
     $defaults = [
         'taxonomy' => 'category',
         'field'    => null,
@@ -73,17 +73,17 @@ function alamanda_first_term( $args = [ ] ) {
     }
 }
 
-function alamanda_class( $base_classes, $optional_class, $conditional ) {
+function etalasepress_class( $base_classes, $optional_class, $conditional ) {
     return $conditional ? $base_classes . ' ' . $optional_class : $base_classes;
 }
 
-function alamanda_bg_image_style( $image_id = false, $image_size = 'full' ) {
+function etalasepress_bg_image_style( $image_id = false, $image_size = 'full' ) {
     if ( !empty( $image_id ) ) {
         return ' style="background-image: url(' . wp_get_attachment_image_url( $image_id, $image_size ) . ');"';
     }
 }
 
-function alamanda_icon( $atts = array() ) {
+function etalasepress_icon( $atts = array() ) {
     $atts = shortcode_atts( array(
         'icon'  => false,
         'group' => 'utility',
@@ -128,14 +128,14 @@ function alamanda_icon( $atts = array() ) {
     return $svg;
 }
 
-function alamanda_has_action( $hook ) {
+function etalasepress_has_action( $hook ) {
     ob_start();
     do_action( $hook );
     $output = ob_get_clean();
     return !empty( $output );
 }
 
-function alamanda_breadcrumbs() {
+function etalasepress_breadcrumbs() {
     if ( function_exists( 'yoast_breadcrumb' ) ) {
         yoast_breadcrumb( '<p id="breadcrumbs" class="breadcrumb">', '</p>' );
     }
